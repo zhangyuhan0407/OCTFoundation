@@ -13,22 +13,24 @@ import OCTFoundation
 
 
 
-extension RouterResponse {
+public extension RouterResponse {
     
-    func send(_ s: OCTResponse) -> RouterResponse {
+    public func send(_ s: OCTResponse) -> RouterResponse {
         return self.send(s.description)
     }
     
     
-    func send(_ json: JSON) -> RouterResponse {
+    public func send(_ json: JSON) -> RouterResponse {
         return self.send(json.description)
     }
     
 }
 
-extension RouterRequest {
+
+
+public extension RouterRequest {
     
-    var jsonBody: JSON? {
+    public var jsonBody: JSON? {
         do {
             
             guard let s = try self.readString() else {
