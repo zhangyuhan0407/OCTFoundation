@@ -3,20 +3,38 @@
 import Foundation
 
 
-#if os(Linux)
-let LogDirPath = "~/Logs/".expandingTildeInPath()
-#else
-let LogDirPath = "/Users/yorg/Developer/MechanMon/Logs/".expandingTildeInPath()
-#endif
+//#if os(Linux)
+//let LogDirPath = "~/Logs/".expandingTildeInPath()
+//#else
+//let LogDirPath = "/Users/yorg/Developer/MechanMon/Logs/".expandingTildeInPath()
+//#endif
 
-let SaveToFile = true
+
+
+
+var SaveToFile = true
 let DebugMode = true
-
+var LogDirPath: String = ""
 
 
 public class Logger {
     
-    private init() {}
+    
+    private init() {
+        let c = #file
+        var component = c.components(separatedBy: "/")
+        component.removeLast()
+        component.removeLast()
+        component.append("Logs")
+        LogDirPath = component.joined(separator: "/")
+        do {
+            try FileManager.default.createDirectory(atPath: LogDirPath, withIntermediateDirectories: true, attributes: nil)
+        } catch {
+            SaveToFile = false
+        }
+        
+    }
+    
     
     private static var DEBUG_BUF = [String]()
     private static var ERROR_BUF = [String]()
@@ -104,10 +122,30 @@ public class Logger {
     
     public class func localTime() -> String {
         
+        return Date.localTime()
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "yyy-MM-dd HH:mm:ss:SSS"
+//        return formatter.string(from: Date())
+    }
+    
+    
+}
+
+
+
+public extension Date {
+    
+    public static func localTime() -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyy-MM-dd HH:mm:ss:SSS"
         return formatter.string(from: Date())
     }
     
-    
 }
+
+
+
+
+
+
+
