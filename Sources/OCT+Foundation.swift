@@ -11,9 +11,9 @@ import Foundation
 
 
 
-extension Int {
+public extension Int {
     
-    static func random(max: Int = 100) -> Int {
+    public static func random(max: Int = 100) -> Int {
         #if os(Linux)
             return Int(Glibc.random() % max)
         #else
@@ -22,11 +22,11 @@ extension Int {
     }
     
     
-    func toPercentage() -> Float {
+    public func toPercentage() -> Float {
         return Float(self)/Float(100)
     }
     
-    func multiply(_ factor: Float) -> Int {
+    public func multiply(_ factor: Float) -> Int {
         return Int(Float(self) * factor)
     }
     
@@ -35,7 +35,7 @@ extension Int {
 
 
 
-enum OCTError: Swift.Error {
+public enum OCTError: Swift.Error {
     case fileNotExist
     case dataConvert
     case jsonConvert
@@ -46,9 +46,9 @@ enum OCTError: Swift.Error {
 
 
 
-extension String {
+public extension String {
     
-    func write(toFile file: String, atomically: Bool, inAppendMode: Bool) throws {
+    public func write(toFile file: String, atomically: Bool, inAppendMode: Bool) throws {
         
         let file = file.expandingTildeInPath()
         
@@ -73,7 +73,7 @@ extension String {
     }
     
     
-    static func read(fromFile file: String) -> String? {
+    public static func read(fromFile file: String) -> String? {
         guard let data = FileManager.default.contents(atPath: file) else {
             return nil
         }
@@ -86,7 +86,7 @@ extension String {
     }
     
     
-    func expandingTildeInPath() -> String {
+    public func expandingTildeInPath() -> String {
         if self.hasPrefix("~") {
             let home = NSHomeDirectory()
             let s = self.replacingOccurrences(of: "~", with: home)
@@ -100,7 +100,7 @@ extension String {
 }
 
 
-func +(dict1: [String: Any], dict2: [String: Any]) -> [String: Any] {
+public func +(dict1: [String: Any], dict2: [String: Any]) -> [String: Any] {
     var ret = dict1
     for key in dict2.keys {
         ret.updateValue(dict2[key], forKey: key)

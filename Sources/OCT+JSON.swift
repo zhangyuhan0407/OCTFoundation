@@ -4,9 +4,9 @@ import Foundation
 import OCTJSON
 
 
-extension JSON {
+public extension JSON {
     
-    static func read(fromFile file: String) -> JSON? {
+    public static func read(fromFile file: String) -> JSON? {
         
         guard let data = FileManager.default.contents(atPath: file) else {
             return nil
@@ -26,11 +26,11 @@ extension JSON {
     }
     
     
-    mutating func update(value: Any, forKey key: String) {
+    public mutating func update(value: Any, forKey key: String) {
         self[key] = JSON(value)
     }
     
-    mutating func add(value: Int, forKey key: String) {
+    public mutating func add(value: Int, forKey key: String) {
         let count = self[key].int ?? 0
         self[key] = JSON(count + value)
     }
