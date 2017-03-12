@@ -22,11 +22,14 @@ public enum OCTResponse: CustomStringConvertible {
     case InputEmpty
     case InputFormatError
     
+    
     case PasswordError
     case UserExists
     case UserNotExists
     case AccountOrPasswordError
     case UserParamsError
+    case ShouldLogin
+    case DatabaseError
     
     
     case ServerError
@@ -60,10 +63,14 @@ public enum OCTResponse: CustomStringConvertible {
             return 20005
         case .InputFormatError:
             return 20006
+        case .ShouldLogin:
+            return 20007
+        
             
         case .ServerError:
             return 30000
-            
+        case .DatabaseError:
+            return 30008
             
         case .UnknownError:
             return 40000
@@ -93,8 +100,12 @@ public enum OCTResponse: CustomStringConvertible {
             return "input empty"
         case .InputFormatError:
             return "input format error"
+        case .ShouldLogin:
+            return "should login first"
         case .ServerError:
             return "server error"
+        case .DatabaseError:
+            return "database error"
         case .UnknownError:
             return "unkown error"
         }
@@ -106,7 +117,7 @@ public enum OCTResponse: CustomStringConvertible {
         case .Succeed(let data):
             return data
         default:
-            return JSON([:] as [String: Any])
+            return JSON([String: Any]())
         }
     }
     

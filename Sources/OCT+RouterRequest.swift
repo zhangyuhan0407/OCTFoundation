@@ -9,19 +9,12 @@
 import Foundation
 import Kitura
 import OCTJSON
-import OCTFoundation
-
 
 
 public extension RouterResponse {
     
-    public func send(_ s: OCTResponse) -> RouterResponse {
+    public func send(_ s: CustomStringConvertible) {
         return self.send(s.description)
-    }
-    
-    
-    public func send(_ json: JSON) -> RouterResponse {
-        return self.send(json.description)
     }
     
 }
