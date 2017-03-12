@@ -13,7 +13,7 @@ import OCTJSON
 
 public extension RouterResponse {
     
-    public func send(_ s: CustomStringConvertible) {
+    public func send(_ s: CustomStringConvertible) -> RouterResponse {
         return self.send(s.description)
     }
     
