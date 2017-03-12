@@ -1,6 +1,8 @@
 
 
 
+import Foundation
+
 #if os(Linux)
     import Glibc
 #else
