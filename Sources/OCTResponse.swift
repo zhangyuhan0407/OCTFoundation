@@ -42,7 +42,7 @@ public enum OCTResponse: CustomStringConvertible {
         case .Succeed:
             return 0
         case .EmptyResult:
-            return 1
+            return 0
             
             
         case .NetWorkError:
